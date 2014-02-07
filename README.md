@@ -1,4 +1,4 @@
-# Scala and NodeJS buildpack [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Jarlakxen/heroku-buildpack-scala-grunt/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+# Scala and NodeJS buildpack [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Jarlakxen/heroku-buildpack-scala-nodejs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ### Enjoy using Grunt, Bower and Scala for develop your webapps. ###
 
