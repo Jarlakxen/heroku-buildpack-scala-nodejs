@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+# Fail Soon
+#set -e
+
+BUILDPACK_HOME=$(cd $(dirname $0)/..; pwd) # absolute path
+BIN_HOME=$BUILDPACK_HOME/bin
+BUILD_DIR=$1
+CACHE_DIR=$2
+
+. $BIN_HOME/common
+
+if ! is_scala_buildpack_present $BUILDPACK_HOME ; then
+  echo "Something got wrong, the Scala Buildpackis not present!"
+  exit 1
+fi
+
+if ! is_nodejs_buildpack_present $BUILDPACK_HOME ; then
+  echo "Something got wrong, the NodeJS Buildpack is not present!"
+  exit 1
+fi
+
+echo "Compiling Scala ..."
+
+compile_scala $BUILDPACK_HOME $BUILD_DIR $CACHE_DIR
+if [ "$?" != "0" ]; then
+  echo "Scala compile failed!"
+  exit 1
+fi
+
+echo "Compiling NodeJS ..."
+
+compile_nodejs $BUILDPACK_HOME $BUILD_DIR $CACHE_DIR
+if [ "$?" != "0" ]; then
+  echo "NodeJS compile failed!"
+  exit 1
+fi
+
+exit 0

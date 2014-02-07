@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# bin/detect <build-dir>
+
+BUILDPACK_HOME=$(cd $(dirname $0); cd ..; pwd)
+BIN_HOME=$(cd $(dirname $0); pwd)
+BUILD_DIR=$1
+
+. $BIN_HOME/common
+
+get_subpacks_in $BUILDPACK_HOME
+
+detect_scala $BUILDPACK_HOME $BUILD_DIR
+SCALA_RETURN=$?
+
+if [ "$SCALA_RETURN" != "0" ]; then
+  echo "Not a Scala project detected!"
+  exit 1
+fi
+
+detect_nodejs $BUILDPACK_HOME $BUILD_DIR
+NODEJS_RETURN=$?
+
+if [ "$NODEJS_RETURN" != "0" ]; then
+  echo "Not a NPM project detected!"
+  exit 1
+fi
+
+exit 0

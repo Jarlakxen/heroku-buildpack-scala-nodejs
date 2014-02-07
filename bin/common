@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+get_subpacks_in(){
+
+	SUBBUILDPACKS_HOME=$1/subpacks
+
+	if [ ! -d $SUBBUILDPACKS_HOME ]; then
+		mkdir $SUBBUILDPACKS_HOME -p
+	fi
+
+	if [ ! -d $SUBBUILDPACKS_HOME/buildpack-nodejs ]; then
+		git clone https://github.com/heroku/heroku-buildpack-nodejs.git $SUBBUILDPACKS_HOME/buildpack-nodejs
+	fi
+
+	if [ ! -d $SUBBUILDPACKS_HOME/buildpack-scala ]; then
+		git clone https://github.com/heroku/heroku-buildpack-scala.git $SUBBUILDPACKS_HOME/buildpack-scala
+	fi
+
+}
+
+is_scala_buildpack_present(){
+	if [ ! -d $1/subpacks/buildpack-scala ]; then
+		return 1
+	fi
+	return 0
+}
+
+is_nodejs_buildpack_present(){
+	if [ ! -d $1/subpacks/buildpack-nodejs ]; then
+		return 1
+	fi
+	return 0
+}
+
+detect_scala(){
+	SUBBUILDPACKS_HOME=$1/subpacks
+	echo `$SUBBUILDPACKS_HOME/buildpack-scala/bin/detect $2`
+}
+
+detect_nodejs(){
+	SUBBUILDPACKS_HOME=$1/subpacks
+	echo `$SUBBUILDPACKS_HOME/buildpack-nodejs/bin/detect $2`
+}
+
+compile_scala(){
+	SUBBUILDPACKS_HOME=$1/subpacks
+	echo `$SUBBUILDPACKS_HOME/buildpack-scala/bin/compile $2 $3`
+}
+
+compile_nodejs(){
+	SUBBUILDPACKS_HOME=$1/subpacks
+	echo `$SUBBUILDPACKS_HOME/buildpack-nodejs/bin/compile $2 $3`
+}
+
+release_scala(){
+	SUBBUILDPACKS_HOME=$1/subpacks
+	echo `$SUBBUILDPACKS_HOME/buildpack-scala/bin/release $2`
+}

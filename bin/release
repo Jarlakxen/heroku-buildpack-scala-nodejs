@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# bin/release <build-dir>
+
+
+BUILDPACK_HOME=$(cd $(dirname $0); cd ..; pwd) # absolute path
+BIN_HOME=$BUILDPACK_HOME/bin
+BUILD_DIR=$1
+
+
+exec release_scala $BUILDPACK_HOME $BUILD_DIR
