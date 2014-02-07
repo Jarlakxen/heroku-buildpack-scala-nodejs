@@ -29,3 +29,7 @@ for make it work together
 			"postinstall": "./node_modules/.bin/bower install; ./node_modules/.bin/grunt"
 		}
 	}
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Jarlakxen/heroku-buildpack-scala-nodejs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
